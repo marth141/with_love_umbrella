@@ -28,20 +28,20 @@ defmodule WithLove.Employee do
       },
       %__MODULE__{
         fname: "Caroline",
-        lname: "Johnson",
-        email: "caroline.johnson@aperturescience.com",
+        lname: "Gelbart",
+        email: "caroline.gelbart@aperturescience.com",
         roles: [WithLove.Role.get(4)]
       },
       %__MODULE__{
         fname: "Glados",
         lname: "Isserman",
-        email: "glados.johnson@aperturescience.com",
+        email: "glados.isserman@aperturescience.com",
         roles: [WithLove.Role.get(5)]
       },
       %__MODULE__{
         fname: "Wheatley",
         lname: "Bennett",
-        email: "wheatley.johnson@aperturescience.com",
+        email: "wheatley.bennett@aperturescience.com",
         roles: [WithLove.Role.get(6)]
       },
       %__MODULE__{
