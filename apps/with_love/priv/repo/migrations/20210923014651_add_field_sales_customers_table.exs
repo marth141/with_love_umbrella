@@ -3,7 +3,7 @@ defmodule WithLove.Repo.Migrations.AddFieldSalesCustomersTable do
 
   def up do
     create table("field_sales_customers") do
-      add :field_sales_rep_id, references(:field_sales_rep)
+      add :field_sales_rep_id, references(:employee)
       add :customer_id, references(:customer)
     end
   end

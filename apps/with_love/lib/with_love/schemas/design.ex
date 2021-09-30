@@ -3,8 +3,8 @@ defmodule WithLove.Design do
   import Ecto.Changeset
 
   schema "design" do
-    field(:document, :binary)
     belongs_to(:project, WithLove.Project)
+    field(:document, :binary)
   end
 
   def new() do

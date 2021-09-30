@@ -3,13 +3,13 @@ defmodule WithLove.Permit do
   import Ecto.Changeset
 
   schema "permit" do
+    belongs_to(:project, WithLove.Project)
     field(:country, :string)
     field(:state, :string)
     field(:city, :string)
     field(:zip, :string)
     field(:authority_name, :string)
     field(:document, :binary)
-    belongs_to(:project, WithLove.Project)
   end
 
   def new() do

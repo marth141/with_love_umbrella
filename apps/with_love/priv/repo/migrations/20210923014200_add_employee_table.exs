@@ -1,8 +1,8 @@
-defmodule WithLove.Repo.Migrations.AddInsideSalesRepTable do
+defmodule WithLove.Repo.Migrations.AddEmployeeTable do
   use Ecto.Migration
 
   def up do
-    create table("inside_sales_rep") do
+    create table("employee") do
       add :fname, :string
       add :lname, :string
       add :email, :string
@@ -10,6 +10,6 @@ defmodule WithLove.Repo.Migrations.AddInsideSalesRepTable do
   end
 
   def down do
-    drop table("inside_sales_rep")
+    drop table("employee")
   end
 end

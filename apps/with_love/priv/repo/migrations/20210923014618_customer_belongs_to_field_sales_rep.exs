@@ -3,7 +3,7 @@ defmodule WithLove.Repo.Migrations.CustomerBelongsToFieldSalesRep do
 
   def change do
     alter table("customer") do
-      add :field_sales_rep_id, references(:field_sales_rep)
+      add :field_sales_rep_id, references(:employee)
     end
   end
 end

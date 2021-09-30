@@ -3,7 +3,7 @@ defmodule WithLove.Repo.Migrations.CustomerBelongsToInsideSalesRep do
 
   def change do
     alter table("customer") do
-      add :inside_sales_rep_id, references(:inside_sales_rep)
+      add :inside_sales_rep_id, references(:employee)
     end
   end
 end

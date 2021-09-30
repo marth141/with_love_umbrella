@@ -7,98 +7,110 @@ defmodule WithLove do
   if it comes from the database, an external API or others.
   """
 
-  alias WithLove.Repo
-
   alias WithLove.{
+    Repo,
+    BillOfMaterial,
+    Call,
     Customer,
-    InsideSalesRep,
-    FieldSalesRep,
-    Project,
-    Permit,
     Design,
+    Email,
+    Employee,
+    FieldOperation,
+    Inspection,
+    InstallAgreement,
+    Install,
+    Permit,
+    Project,
+    Project,
+    ProposalAgreement,
     Proposal,
-    ProjectManager,
+    Role,
     UtilityCompany
   }
 
   alias Ecto.Changeset
 
-  def add_customer_to_inside_sales_rep(
-        %Customer{} = customer,
-        %InsideSalesRep{} = inside_sales_rep
+  def setup() do
+    {:ok, customer} = Customer.create()
+
+    Employee.create()
+
+    field_rep = Employee.get(1)
+    inside_rep = Employee.get(2)
+    project_manager = Employee.get(3)
+
+    {:ok, customer} = WithLove.add_employee_to_customer_as_field_sales_rep(field_rep, customer)
+    {:ok, customer} = WithLove.add_employee_to_customer_as_inside_sales_rep(inside_rep, customer)
+
+    {:ok, customer} =
+      WithLove.add_employee_to_customer_as_project_manager(project_manager, customer)
+
+    {:ok, _customer} = WithLove.add_project_to_customer(%{}, customer)
+
+    {:ok, "Setup Customer"}
+  end
+
+  def add_role_to_employee(
+        %Role{} = role,
+        %Employee{} = employee
+      ) do
+    employee
+    |> Changeset.change()
+    |> Changeset.put_assoc(:roles, [role])
+  end
+
+  def add_employee_to_customer_as_inside_sales_rep(
+        %Employee{} = inside_sales_rep,
+        %Customer{} = customer
       ) do
     customer
     |> Changeset.change(%{inside_sales_rep_id: inside_sales_rep.id})
     |> Repo.update()
   end
 
-  def add_customer_to_inside_sales_rep(customer_id, %InsideSalesRep{} = inside_sales_rep)
-      when is_integer(customer_id) do
-    customer = Repo.get(Customer, customer_id)
+  def add_employee_to_customer_as_inside_sales_rep(inside_sales_rep_id, %Customer{} = customer)
+      when is_integer(inside_sales_rep_id) do
+    inside_sales_rep = Repo.get(Employee, inside_sales_rep_id)
 
     customer
     |> Changeset.change(%{inside_sales_rep_id: inside_sales_rep.id})
     |> Repo.update()
   end
 
-  def add_customer_to_inside_sales_rep(customer_map, %InsideSalesRep{} = inside_sales_rep)
-      when is_map(customer_map) do
-    %Customer{}
-    |> Changeset.change(customer_map)
-    |> Changeset.put_change(:inside_sales_rep_id, inside_sales_rep.id)
-    |> Repo.insert()
-  end
-
-  def add_customer_to_field_sales_rep(
-        %Customer{} = customer,
-        %FieldSalesRep{} = inside_sales_rep
+  def add_employee_to_customer_as_field_sales_rep(
+        %Employee{} = field_sales_rep,
+        %Customer{} = customer
       ) do
     customer
-    |> Changeset.change(%{field_sales_rep_id: inside_sales_rep.id})
+    |> Changeset.change(%{field_sales_rep_id: field_sales_rep.id})
     |> Repo.update()
   end
 
-  def add_customer_to_field_sales_rep(customer_id, %FieldSalesRep{} = inside_sales_rep)
-      when is_integer(customer_id) do
-    customer = Repo.get(Customer, customer_id)
+  def add_employee_to_customer_as_field_sales_rep(field_sales_rep_id, %Customer{} = customer)
+      when is_integer(field_sales_rep_id) do
+    project_manager = Repo.get(Employee, field_sales_rep_id)
 
     customer
-    |> Changeset.change(%{field_sales_rep_id: inside_sales_rep.id})
+    |> Changeset.change(%{field_sales_rep_id: project_manager.id})
     |> Repo.update()
   end
 
-  def add_customer_to_field_sales_rep(customer_map, %FieldSalesRep{} = inside_sales_rep)
-      when is_map(customer_map) do
-    %Customer{}
-    |> Changeset.change(customer_map)
-    |> Changeset.put_change(:field_sales_rep_id, inside_sales_rep.id)
-    |> Repo.insert()
-  end
-
-  def add_customer_to_project_manager(
-        %Customer{} = customer,
-        %ProjectManager{} = project_manager
+  def add_employee_to_customer_as_project_manager(
+        %Employee{} = project_manager,
+        %Customer{} = customer
       ) do
     customer
     |> Changeset.change(%{project_manager_id: project_manager.id})
     |> Repo.update()
   end
 
-  def add_customer_to_project_manager(customer_id, %ProjectManager{} = project_manager)
-      when is_integer(customer_id) do
-    customer = Repo.get(Customer, customer_id)
+  def add_employee_to_customer_as_project_manager(project_manager_id, %Customer{} = customer)
+      when is_integer(project_manager_id) do
+    project_manager = Repo.get(Employee, project_manager_id)
 
     customer
     |> Changeset.change(%{project_manager_id: project_manager.id})
     |> Repo.update()
-  end
-
-  def add_customer_to_project_manager(customer_map, %ProjectManager{} = project_manager)
-      when is_map(customer_map) do
-    %Customer{}
-    |> Changeset.change(customer_map)
-    |> Changeset.put_change(:project_manager_id, project_manager.id)
-    |> Repo.insert()
   end
 
   def add_project_to_customer(

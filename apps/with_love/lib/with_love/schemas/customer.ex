@@ -13,9 +13,9 @@ defmodule WithLove.Customer do
     field(:state, :string)
     field(:country, :string)
     field(:zip, :string)
-    belongs_to(:inside_sales_rep, WithLove.InsideSalesRep)
-    belongs_to(:field_sales_rep, WithLove.FieldSalesRep)
-    belongs_to(:project_manager, WithLove.ProjectManager)
+    belongs_to(:inside_sales_rep, WithLove.Employee)
+    belongs_to(:field_sales_rep, WithLove.Employee)
+    belongs_to(:project_manager, WithLove.Employee)
     has_many(:projects, WithLove.Project)
   end
 
