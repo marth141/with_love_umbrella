@@ -22,9 +22,9 @@ defmodule WithLove.Customer do
 
   def new() do
     %__MODULE__{
-      fname: "Cave",
-      lname: "Johnson",
-      email: "cave.johnson@aperturescience.com",
+      fname: "Chell",
+      lname: "Protagonist",
+      email: "chell.protagonist@aperaturescience.com",
       street: "123 Lemon Avenue",
       city: "Copper Harbor",
       state: "Michigan",

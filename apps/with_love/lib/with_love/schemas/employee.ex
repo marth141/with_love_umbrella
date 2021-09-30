@@ -15,9 +15,9 @@ defmodule WithLove.Employee do
   def new() do
     [
       %__MODULE__{
-        fname: "Chell",
-        lname: "Protagonist",
-        email: "chell.protagonist@aperaturescience.com",
+        fname: "Cave",
+        lname: "Johnson",
+        email: "cave.johnson@aperturescience.com",
         roles: [WithLove.Role.get(2)]
       },
       %__MODULE__{
@@ -45,15 +45,15 @@ defmodule WithLove.Employee do
         roles: [WithLove.Role.get(6)]
       },
       %__MODULE__{
-        fname: "Greg",
+        fname: "Atlas",
         lname: "Whitten",
-        email: "greg.whitten@aperturescience.com",
+        email: "atlas.whitten@aperturescience.com",
         roles: [WithLove.Role.get(7)]
       },
       %__MODULE__{
-        fname: "Henry",
+        fname: "Peabody",
         lname: "Amaturo",
-        email: "henry.amaturo@aperturescience.com",
+        email: "peabody.amaturo@aperturescience.com",
         roles: [WithLove.Role.get(8)]
       }
     ]
