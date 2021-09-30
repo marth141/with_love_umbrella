@@ -6,25 +6,17 @@ defmodule WithLove.Project do
   # Might have things like permits
   schema "project" do
     belongs_to(:customer, WithLove.Customer)
-    # TODO
     has_many(:calls, WithLove.Call)
-    # TODO
     has_many(:emails, WithLove.Email)
-    # TODO
     has_many(:sms_messages, WithLove.SMSMessage)
-    # TODO
     has_one(:proposal_agreement, WithLove.ProposalAgreement)
     has_many(:proposals, WithLove.Proposal)
-    # TODO
     has_one(:install_agreement, WithLove.InstallAgreement)
     has_many(:designs, WithLove.Design)
     # TODO maybe active or approved design
     has_many(:permits, WithLove.Permit)
-    # TODO
     has_one(:install, WithLove.Install)
-    # TODO
     has_many(:inspections, WithLove.Inspection)
-    # TODO
     has_many(:bills_of_materials, WithLove.BillOfMaterial)
   end
 

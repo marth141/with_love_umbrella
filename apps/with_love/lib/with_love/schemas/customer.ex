@@ -5,6 +5,9 @@ defmodule WithLove.Customer do
   # Customers may get owned by a inside and or field sales rep
   # Customers might have many projects
   schema "customer" do
+    belongs_to(:inside_sales_rep, WithLove.Employee)
+    belongs_to(:field_sales_rep, WithLove.Employee)
+    belongs_to(:project_manager, WithLove.Employee)
     field(:fname, :string)
     field(:lname, :string)
     field(:email, :string)
@@ -13,9 +16,6 @@ defmodule WithLove.Customer do
     field(:state, :string)
     field(:country, :string)
     field(:zip, :string)
-    belongs_to(:inside_sales_rep, WithLove.Employee)
-    belongs_to(:field_sales_rep, WithLove.Employee)
-    belongs_to(:project_manager, WithLove.Employee)
     has_many(:projects, WithLove.Project)
     many_to_many(:roles, WithLove.Role, join_through: "customer_role")
   end

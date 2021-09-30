@@ -3,8 +3,8 @@ defmodule WithLove.UtilityCompany do
   import Ecto.Changeset
 
   schema "utility_company" do
-    field(:name, :string)
     belongs_to(:project, WithLove.Project)
+    field(:name, :string)
   end
 
   def new() do
