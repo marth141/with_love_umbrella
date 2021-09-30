@@ -84,9 +84,9 @@ defmodule WithLove do
   def setup() do
     Role.create()
 
-    {:ok, customer} = Customer.create()
-
     Employee.create()
+
+    {:ok, customer} = Customer.create()
 
     field_rep = Employee.get(1)
     inside_rep = Employee.get(2)
