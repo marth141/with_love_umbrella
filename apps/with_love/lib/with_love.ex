@@ -87,7 +87,7 @@ defmodule WithLove do
 
     {:ok, _customer} = WithLove.add_project_to_customer(%{}, customer)
 
-    {:ok, "Setup Customer"}
+    {:ok, "Setup Customers, Employees, and Projects"}
   end
 
   def add_role_to_employee(
