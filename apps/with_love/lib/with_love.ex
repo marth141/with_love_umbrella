@@ -30,8 +30,48 @@ defmodule WithLove do
 
   alias Ecto.Changeset
 
+  def list_projects_and_preloads() do
+    Repo.all(Project)
+    |> Repo.preload([
+      :bills_of_materials,
+      :calls,
+      :customer,
+      :designs,
+      :emails,
+      :inspections,
+      :install,
+      :install_agreement,
+      :permits,
+      :proposal_agreement,
+      :proposals,
+      :sms_messages
+    ])
+  end
+
+  def list_employees_and_preloads() do
+    Repo.all(Employee)
+    |> Repo.preload([
+      :field_sales_customers,
+      :inside_sales_customers,
+      :project_managers_customers,
+      :roles
+    ])
+  end
+
+  def list_customers_and_preloads() do
+    Repo.all(Customer)
+    |> Repo.preload([
+      :inside_sales_rep,
+      :field_sales_rep,
+      :project_manager,
+      :projects
+    ])
+  end
+
   def setup() do
     {:ok, customer} = Customer.create()
+
+    Role.create()
 
     Employee.create()
 

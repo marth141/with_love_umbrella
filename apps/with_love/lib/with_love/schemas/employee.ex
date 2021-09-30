@@ -17,17 +17,20 @@ defmodule WithLove.Employee do
       %__MODULE__{
         fname: "Chell",
         lname: "Protagonist",
-        email: "chell.protagonist@aperaturescience.com"
+        email: "chell.protagonist@aperaturescience.com",
+        roles: [WithLove.Role.get(1)]
       },
       %__MODULE__{
         fname: "Doug",
         lname: "Rattmann",
-        email: "doug.rattmann@aperturescience.com"
+        email: "doug.rattmann@aperturescience.com",
+        roles: [WithLove.Role.get(2)]
       },
       %__MODULE__{
         fname: "Tony",
         lname: "Stark",
-        email: "tony.stark@aperturescience.com"
+        email: "tony.stark@aperturescience.com",
+        roles: [WithLove.Role.get(3)]
       }
     ]
   end
