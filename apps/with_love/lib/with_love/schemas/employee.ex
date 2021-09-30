@@ -18,19 +18,43 @@ defmodule WithLove.Employee do
         fname: "Chell",
         lname: "Protagonist",
         email: "chell.protagonist@aperaturescience.com",
-        roles: [WithLove.Role.get(1)]
+        roles: [WithLove.Role.get(2)]
       },
       %__MODULE__{
         fname: "Doug",
         lname: "Rattmann",
         email: "doug.rattmann@aperturescience.com",
-        roles: [WithLove.Role.get(2)]
+        roles: [WithLove.Role.get(3)]
       },
       %__MODULE__{
-        fname: "Tony",
-        lname: "Stark",
-        email: "tony.stark@aperturescience.com",
-        roles: [WithLove.Role.get(3)]
+        fname: "Caroline",
+        lname: "Johnson",
+        email: "caroline.johnson@aperturescience.com",
+        roles: [WithLove.Role.get(4)]
+      },
+      %__MODULE__{
+        fname: "Glados",
+        lname: "Isserman",
+        email: "glados.johnson@aperturescience.com",
+        roles: [WithLove.Role.get(5)]
+      },
+      %__MODULE__{
+        fname: "Wheatley",
+        lname: "Bennett",
+        email: "wheatley.johnson@aperturescience.com",
+        roles: [WithLove.Role.get(6)]
+      },
+      %__MODULE__{
+        fname: "Greg",
+        lname: "Whitten",
+        email: "greg.whitten@aperturescience.com",
+        roles: [WithLove.Role.get(7)]
+      },
+      %__MODULE__{
+        fname: "Henry",
+        lname: "Amaturo",
+        email: "henry.amaturo@aperturescience.com",
+        roles: [WithLove.Role.get(8)]
       }
     ]
   end

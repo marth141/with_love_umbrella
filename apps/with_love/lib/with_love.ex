@@ -30,6 +30,18 @@ defmodule WithLove do
 
   alias Ecto.Changeset
 
+  def list_projects() do
+    Repo.all(Project)
+  end
+
+  def list_employees() do
+    Repo.all(Employee)
+  end
+
+  def list_customers() do
+    Repo.all(Customer)
+  end
+
   def list_projects_and_preloads() do
     Repo.all(Project)
     |> Repo.preload([
@@ -64,14 +76,15 @@ defmodule WithLove do
       :inside_sales_rep,
       :field_sales_rep,
       :project_manager,
-      :projects
+      :projects,
+      :roles
     ])
   end
 
   def setup() do
-    {:ok, customer} = Customer.create()
-
     Role.create()
+
+    {:ok, customer} = Customer.create()
 
     Employee.create()
 
@@ -96,7 +109,8 @@ defmodule WithLove do
       ) do
     employee
     |> Changeset.change()
-    |> Changeset.put_assoc(:roles, [role])
+    |> Changeset.put_assoc(:roles, [role | employee.roles])
+    |> Repo.insert_or_update()
   end
 
   def add_employee_to_customer_as_inside_sales_rep(
@@ -105,7 +119,7 @@ defmodule WithLove do
       ) do
     customer
     |> Changeset.change(%{inside_sales_rep_id: inside_sales_rep.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_employee_to_customer_as_inside_sales_rep(inside_sales_rep_id, %Customer{} = customer)
@@ -114,7 +128,7 @@ defmodule WithLove do
 
     customer
     |> Changeset.change(%{inside_sales_rep_id: inside_sales_rep.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_employee_to_customer_as_field_sales_rep(
@@ -123,7 +137,7 @@ defmodule WithLove do
       ) do
     customer
     |> Changeset.change(%{field_sales_rep_id: field_sales_rep.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_employee_to_customer_as_field_sales_rep(field_sales_rep_id, %Customer{} = customer)
@@ -132,7 +146,7 @@ defmodule WithLove do
 
     customer
     |> Changeset.change(%{field_sales_rep_id: project_manager.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_employee_to_customer_as_project_manager(
@@ -141,7 +155,7 @@ defmodule WithLove do
       ) do
     customer
     |> Changeset.change(%{project_manager_id: project_manager.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_employee_to_customer_as_project_manager(project_manager_id, %Customer{} = customer)
@@ -150,7 +164,7 @@ defmodule WithLove do
 
     customer
     |> Changeset.change(%{project_manager_id: project_manager.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_project_to_customer(
@@ -159,7 +173,7 @@ defmodule WithLove do
       ) do
     project
     |> Changeset.change(%{customer_id: customer.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_project_to_customer(project_id, %Customer{} = customer)
@@ -168,7 +182,7 @@ defmodule WithLove do
 
     project
     |> Changeset.change(%{customer_id: customer.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_project_to_customer(project_map, %Customer{} = customer)
@@ -176,7 +190,7 @@ defmodule WithLove do
     %Project{}
     |> Changeset.change(project_map)
     |> Changeset.put_change(:customer_id, customer.id)
-    |> Repo.insert()
+    |> Repo.insert_or_update()
   end
 
   def add_permit_to_project(
@@ -194,7 +208,7 @@ defmodule WithLove do
 
     permit
     |> Changeset.change(%{project_id: project.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_permit_to_project(permit_map, %Project{} = project)
@@ -202,7 +216,7 @@ defmodule WithLove do
     %Permit{}
     |> Changeset.change(permit_map)
     |> Changeset.put_change(:project_id, project.id)
-    |> Repo.insert()
+    |> Repo.insert_or_update()
   end
 
   def add_design_to_project(
@@ -220,7 +234,7 @@ defmodule WithLove do
 
     design
     |> Changeset.change(%{project_id: project.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_design_to_project(design_map, %Project{} = project)
@@ -228,7 +242,7 @@ defmodule WithLove do
     %Design{}
     |> Changeset.change(design_map)
     |> Changeset.put_change(:project_id, project.id)
-    |> Repo.insert()
+    |> Repo.insert_or_update()
   end
 
   def add_proposal_to_project(
@@ -246,7 +260,7 @@ defmodule WithLove do
 
     proposal
     |> Changeset.change(%{project_id: project.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_proposal_to_project(proposal_map, %Project{} = project)
@@ -254,7 +268,7 @@ defmodule WithLove do
     %Proposal{}
     |> Changeset.change(proposal_map)
     |> Changeset.put_change(:project_id, project.id)
-    |> Repo.insert()
+    |> Repo.insert_or_update()
   end
 
   def add_utility_company_to_project(
@@ -272,7 +286,7 @@ defmodule WithLove do
 
     utility_company
     |> Changeset.change(%{project_id: project.id})
-    |> Repo.update()
+    |> Repo.insert_or_update()
   end
 
   def add_utility_company_to_project(utility_company_map, %Project{} = project)
@@ -280,6 +294,6 @@ defmodule WithLove do
     %Proposal{}
     |> Changeset.change(utility_company_map)
     |> Changeset.put_change(:project_id, project.id)
-    |> Repo.insert()
+    |> Repo.insert_or_update()
   end
 end

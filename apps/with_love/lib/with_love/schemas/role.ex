@@ -4,11 +4,13 @@ defmodule WithLove.Role do
 
   schema "role" do
     field(:title, :string)
-    many_to_many(:employees, WithLove.Employee, join_through: "employee_role")
   end
 
   def new() do
     [
+      %__MODULE__{
+        title: "Customer"
+      },
       %__MODULE__{
         title: "Field Sales Rep"
       },
@@ -23,6 +25,12 @@ defmodule WithLove.Role do
       },
       %__MODULE__{
         title: "Installer"
+      },
+      %__MODULE__{
+        title: "Accountant"
+      },
+      %__MODULE__{
+        title: "Marketing"
       }
     ]
   end

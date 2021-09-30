@@ -17,6 +17,7 @@ defmodule WithLove.Customer do
     belongs_to(:field_sales_rep, WithLove.Employee)
     belongs_to(:project_manager, WithLove.Employee)
     has_many(:projects, WithLove.Project)
+    many_to_many(:roles, WithLove.Role, join_through: "customer_role")
   end
 
   def new() do
@@ -28,7 +29,8 @@ defmodule WithLove.Customer do
       city: "Copper Harbor",
       state: "Michigan",
       country: "United States",
-      zip: "49918"
+      zip: "49918",
+      roles: [WithLove.Role.get(1)]
     }
   end
 
