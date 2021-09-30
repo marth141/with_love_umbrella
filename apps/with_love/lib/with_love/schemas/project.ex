@@ -18,13 +18,14 @@ defmodule WithLove.Project do
     # TODO
     has_one(:install_agreement, WithLove.InstallAgreement)
     has_many(:designs, WithLove.Design)
+    # TODO maybe active or approved design
     has_many(:permits, WithLove.Permit)
     # TODO
     has_one(:install, WithLove.Install)
     # TODO
     has_many(:inspections, WithLove.Inspection)
     # TODO
-    has_many(:bill_of_materials, WithLove.BillOfMaterial)
+    has_many(:bills_of_materials, WithLove.BillOfMaterial)
   end
 
   def new() do
